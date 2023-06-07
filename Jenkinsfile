@@ -14,6 +14,11 @@ pipeline {
                 sh 'mvn package'
             }
         }
+        stage('SCM') {
+            steps {
+                checkout scm
+            }
+        }
         stage('SonarQube Analysis') {
             steps {
                 def mvn = tool 'Maven 3'
