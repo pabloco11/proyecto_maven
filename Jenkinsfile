@@ -14,14 +14,13 @@ pipeline {
                 sh 'mvn package'
             }
         }
-        stage('SCM') {
-            checkout scm
-        }
         stage('SonarQube Analysis') {
-            def mvn = tool 'Default Maven';
-            withSonarQubeEnv() {
-            sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=EjercicioM3-L4 -Dsonar.projectName='EjercicioM3-L4'"
+            steps {
+                def mvn = tool 'Default Maven'
+                withSonarQubeEnv() {
+                    sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=EjercicioM3-L4 -Dsonar.projectName='EjercicioM3-L4'"
+                }
             }
         }
-      }
+    }
 }
